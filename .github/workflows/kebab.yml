@@ -1,0 +1,43 @@
+name: Kebab Time Notification
+
+on:
+  schedule:
+    # Runs at 11:50 AM every Wednesday (AEST)
+    # Note: GitHub Actions uses UTC time, so we need to adjust
+    # UTC 1:50 AM = AEST 11:50 AM
+    - cron: '50 1 * * 3'
+  
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Send kebab notification
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: |
+          # Array of fun messages
+          messages=(
+            "🥙 KEBAB TIME! Gather your hunger and your mates - it's Wednesday kebab o'clock!"
+            "🌯 The weekly kebab pilgrimage begins! Time to wrap up work and wrap up some delicious kebab!"
+            "⏰ Kebab Wednesday has arrived! Your taste buds' favourite time of the week!"
+            "🏃 Quick, to the kebab shop! It's 11:50 on Kebab Wednesday, mate!"
+            "🤑 It is me, the Kebab shop owner! I require your weekly kebab money."
+            "🤠 It is near-high-noon, my dudes."
+            "💡 Here is an idea, stop what you're doing and get a kebab."
+            "🕛 Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong. It's time for a kebab."
+          )
+          
+          # Get random message
+          random_index=$((RANDOM % ${#messages[@]}))
+          message="${messages[$random_index]}"
+          
+          # Send to Google Chat
+          curl -X POST -H "Content-Type: application/json" \
+            -d "{\"text\": \"$message\"}" \
+            "$WEBHOOK_URL"
