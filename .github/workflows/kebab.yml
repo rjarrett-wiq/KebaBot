@@ -2,10 +2,10 @@ name: Kebab Time Notification
 
 on:
   schedule:
-    # Runs at 11:50 AM every Wednesday (AEST)
-    # Note: GitHub Actions uses UTC time, so we need to adjust
-    # UTC 1:50 AM = AEST 11:50 AM
-    - cron: '*/5 * * * *'
+    # Runs at 11:50 AM every Wednesday (AEDT/Sydney time)
+    # Accounting for possible GitHub delays, setting to 20 minutes earlier
+    # Sydney is UTC+11 (during daylight saving), so 11:30 AM Sydney = 00:30 AM UTC
+    - cron: '30 0 * * 2-4'
   
   # Allow manual trigger for testing
   workflow_dispatch:
@@ -19,16 +19,16 @@ jobs:
 
       - name: Send kebab notification
         env:
-          WEBHOOK_URL: ${{ secrets.TEST_WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         run: |
           # Array of fun messages
           messages=(
-            "🥙 KEBAB TIME! Gather your hunger and your mates - it's Wednesday kebab o'clock!"
+            "🥙 KEBAB TIME! Gather your hunger and your mates - it's kebab o'clock!"
             "🌯 The weekly kebab pilgrimage begins! Time to wrap up work and wrap up some delicious kebab!"
-            "⏰ Kebab Wednesday has arrived! Your taste buds' favourite time of the week!"
-            "🏃 Quick, to the kebab shop! It's 11:50 on Kebab Wednesday, mate!"
+            "⏰ Kebab Tuesday-Thursday has arrived! Your taste buds' favourite time of the week!"
+            "🏃 Quick, to the kebab shop! It's somewhere between 11:30am and 12:30pm on Kebab Tuesday-Thursday, mate!"
             "🤑 It is me, the Kebab shop owner! I require your weekly kebab money."
-            "🤠 It is near-high-noon, my dudes."
+            "🤠 It is near-high-noon, my dudes. It's also possibility not noon. I'm a bot built on github workflows. You get what you pay for."
             "💡 Here is an idea, stop what you're doing and get a kebab."
             "🕛 Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong. It's time for a kebab."
           )
