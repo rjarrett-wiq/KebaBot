@@ -5,7 +5,7 @@ on:
     # Runs at 11:50 AM every Wednesday (AEDT/Sydney time)
     # Accounting for possible GitHub delays, setting to 20 minutes earlier
     # Sydney is UTC+11 (during daylight saving), so 11:30 AM Sydney = 00:30 AM UTC
-    - cron: '30 0 * * 3'
+    - cron: '30 23 * * 2'
   
   # Allow manual trigger for testing
   workflow_dispatch:
