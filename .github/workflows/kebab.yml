@@ -23,14 +23,7 @@ jobs:
         run: |
           # Array of fun messages
           messages=(
-            "🥙 KEBAB TIME! Gather your hunger and your mates - it's kebab o'clock!"
-            "🌯 The weekly kebab pilgrimage begins! Time to wrap up work and wrap up some delicious kebab!"
-            "⏰ Kebab Wednesday has arrived! Your taste buds' favourite time of the week!"
-            "🏃 Quick, to the kebab shop! It's somewhere between 11:30am and 12:30pm on Kebab Wednesday, mate!"
-            "🤑 It is me, the Kebab shop owner! I require your weekly kebab money."
-            "🤠 It is near-high-noon, my dudes. It's also possibility not noon. I'm a bot built on github workflows. You get what you pay for."
-            "💡 Here is an idea, stop what you're doing and get a kebab."
-            "🕛 Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong. It's time for a kebab."
+            "🥙 KEBAB TIME! Gather your hunger and your mates (except Ishaan) - it's kebab o'clock!"
           )
           
           # Get random message
