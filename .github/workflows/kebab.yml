@@ -22,7 +22,7 @@ jobs:
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         run: |
           # Array of fun messages
-          messages=(
+          english_messages=(
             "🥙 KEBAB TIME! Gather your hunger and your mates - it's kebab o'clock!"
             "🌯 The weekly kebab pilgrimage begins! Time to wrap up work and wrap up some delicious kebab!"
             "⏰ Kebab Wednesday has arrived! Your taste buds' favourite time of the week!"
@@ -31,7 +31,6 @@ jobs:
             "🤠 It is near-high-noon, my dudes. It's also possibility not noon. I'm a bot built on github workflows. You get what you pay for."
             "💡 Here is an idea, stop what you're doing and get a kebab."
             "🕛 Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong Bong. It's time for a kebab."
-            "🍟 Jansen Zhang 的精神告诉你去吃个烤肉串吧 👻"
             "🥙 Oi oi oi! Kebab o'clock has snuck up on us again. Down tools, grab your wallet."
             "🌯 Doner calls! Answer it. It's rude to leave a kebab waiting."
             "🔥 The spit is spinning, the meat is dreaming of you. Go make its day."
@@ -84,7 +83,50 @@ jobs:
             "🍽️ That's a wrap. Literally. Go and get one."
           )
           
-          # Get random message
+          # Select a language and get a random message
+          case $((RANDOM % 5)) in
+            0)
+              messages=("${english_messages[@]}")
+              ;;
+            1)
+              messages=(
+                "🍟 Jansen Zhang 的精神告诉你去吃个烤肉串吧 👻"
+                "🥙 烤肉卷时间到！叫上朋友，准备好胃口——现在就是享用烤肉卷的时刻！"
+                "🌯 每周的烤肉朝圣开始了！放下工作，来份美味的烤肉卷吧！"
+                "⏰ 烤肉星期三到啦！这是你味蕾最期待的一周时刻！"
+                "🥙 蒜酱还是辣酱？两个都要！今天是烤肉星期三，尽情享受吧。"
+                "🍽️ 大家集合！烤肉卷可不会自己吃掉自己。"
+              )
+              ;;
+            2)
+              messages=(
+                "🥙 कबाब का समय हो गया! दोस्तों को बुलाइए और स्वादिष्ट कबाब का आनंद लीजिए!"
+                "🌯 हर हफ़्ते की कबाब यात्रा शुरू! काम समेटिए और स्वादिष्ट कबाब का मज़ा लीजिए!"
+                "⏰ कबाब वाला बुधवार आ गया! आपके स्वाद का हफ़्ते का पसंदीदा समय!"
+                "🥙 लहसुन की चटनी या तीखी चटनी? दोनों लीजिए! आज कबाब बुधवार है, थोड़ा मज़े कीजिए।"
+                "🍽️ सब लोग इकट्ठा हो जाइए। कबाब अपने आप नहीं खाया जाएगा!"
+              )
+              ;;
+            3)
+              messages=(
+                "🥙 ¡Es hora de kebab! Reúne a tus amigos y prepárate para disfrutar."
+                "🌯 ¡Comienza la peregrinación semanal del kebab! Deja el trabajo y disfruta de uno delicioso."
+                "⏰ ¡Ya llegó el miércoles de kebab! ¡El momento favorito de la semana para tu paladar!"
+                "🥙 ¿Salsa de ajo o picante? ¡Las dos! Es miércoles de kebab, date un gusto."
+                "🍽️ ¡Que se reúna todo el equipo! El kebab no se come solo."
+              )
+              ;;
+            4)
+              messages=(
+                "🥙 حان وقت الكباب! اجمع أصدقاءك واستعد للاستمتاع بكباب لذيذ!"
+                "🌯 بدأت رحلة الكباب الأسبوعية! أنهِ عملك واستمتع بكباب شهي."
+                "⏰ وصل أربعاء الكباب! الوقت المفضل في الأسبوع لمذاقك!"
+                "🥙 صلصة الثوم أم الحارة؟ خذ الاثنين! إنه أربعاء الكباب، دلّل نفسك."
+                "🍽️ اجمع الفريق! الكباب لن يأكل نفسه."
+              )
+              ;;
+          esac
+
           random_index=$((RANDOM % ${#messages[@]}))
           message="${messages[$random_index]}"
           
