@@ -129,6 +129,12 @@ jobs:
 
           random_index=$((RANDOM % ${#messages[@]}))
           message="${messages[$random_index]}"
+
+          fillings=("chicken" "beef" "mixed")
+          sauces=("garlic" "BBQ" "tomato" "hummous" "chilli" "Holy Trinity (chilli, BBQ, garlic)")
+          filling="${fillings[$((RANDOM % ${#fillings[@]}))]}"
+          sauce="${sauces[$((RANDOM % ${#sauces[@]}))]}"
+          message+=" — Recommended kebab: ${filling} with ${sauce} sauce."
           
           # Send to Google Chat
           curl -X POST -H "Content-Type: application/json" \
